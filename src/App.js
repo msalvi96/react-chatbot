@@ -1,25 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import Chatbot from 'react-simple-chatbot';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  state = {
+    opened: false
+  }
+
+  toggleFloating = ({ opened }) => {
+    this.setState({ opened });
+  }
+
+  render() {
+    const { opened } = this.state;
+    return (
+      <div className="App">
+        <Chatbot
+          floating={true}
+          opened={opened}
+          toggleFloating={this.toggleFloating}
+          steps={[
+            {
+              id: "1",
+              message: "Hello. I am a Virtual Assistant. I am still learning so try asking me a few questions",
+              trigger: '2'
+            },
+            {
+              id: "2",
+              user: true,
+              end: false
+            }
+          ]}
+        />
+      </div>
+    )
+  }
 }
 
 export default App;
